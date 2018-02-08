@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="SiteServer.Plugin, Version=1.2.33.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\SiteServer.Plugin.1.2.33-beta\lib\net45\SiteServer.Plugin.dll</HintPath>
     </Reference>
@@ -48,38 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\ApiHttpGet.cs" />
-    <Compile Include="Api\ApiJsonActionsPost.cs" />
     <Compile Include="Core\CacheUtils.cs" />
-    <Compile Include="Core\QqClient.cs" />
+    <Compile Include="Core\LayerUtils.cs" />
+    <Compile Include="Core\SmsManager.cs" />
     <Compile Include="Core\Utils.cs" />
-    <Compile Include="Core\WeiboClient.cs" />
-    <Compile Include="Core\WeixinClient.cs" />
-    <Compile Include="Main.cs" />
+    <Compile Include="Pages\ModalTest.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SmsPlugin.cs" />
     <Compile Include="Model\ConfigInfo.cs" />
-    <Compile Include="Model\OAuthInfo.cs" />
-    <Compile Include="Pages\PageOAuth.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\PageOAuthQq.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\PageOAuthWeibo.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\PageOAuthWeixin.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
+    <Compile Include="Model\ESmsProviderType.cs" />
     <Compile Include="Pages\PageSettings.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Parse\StlLogin.cs" />
-    <Compile Include="Parse\ParseUtils.cs" />
-    <Compile Include="Parse\StlRegister.cs" />
-    <Compile Include="Parse\StlLogout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Provider\Dao.cs" />
-    <Compile Include="Provider\OAuthDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="appveyor.yml" />
@@ -91,21 +70,22 @@
     <None Include="assets\plugin-utils\fonts\ionicons.eot" />
     <None Include="assets\plugin-utils\fonts\ionicons.ttf" />
     <None Include="assets\plugin-utils\fonts\ionicons.woff" />
-    <None Include="assets\README.md" />
     <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\images\login_qq.png" />
-    <Content Include="assets\images\login_weibo.png" />
-    <Content Include="assets\images\login_weixin.png" />
-    <Content Include="assets\images\times.png" />
-    <Content Include="assets\js\axios-0.17.1.min.js" />
-    <Content Include="assets\js\device.min.js" />
-    <Content Include="assets\js\jquery.min.js" />
-    <Content Include="assets\js\sweetalert.min.js" />
-    <Content Include="assets\js\vee-validate-2.0.3.js" />
-    <Content Include="assets\js\vue-2.1.10.min.js" />
+    <Content Include="assets\layer\extend\layer.ext.js" />
+    <Content Include="assets\layer\layer.min.js" />
+    <Content Include="assets\layer\skin\default\icon_ext.png" />
+    <Content Include="assets\layer\skin\default\textbg.png" />
+    <Content Include="assets\layer\skin\default\xubox_ico0.png" />
+    <Content Include="assets\layer\skin\default\xubox_loading0.gif" />
+    <Content Include="assets\layer\skin\default\xubox_loading1.gif" />
+    <Content Include="assets\layer\skin\default\xubox_loading2.gif" />
+    <Content Include="assets\layer\skin\default\xubox_loading3.gif" />
+    <Content Include="assets\layer\skin\default\xubox_title0.png" />
+    <Content Include="assets\layer\skin\layer.css" />
+    <Content Include="assets\layer\skin\layer.ext.css" />
     <Content Include="assets\plugin-utils\css\bootstrap.min.css" />
     <Content Include="assets\plugin-utils\css\font-awesome.min.css" />
     <Content Include="assets\plugin-utils\css\ionicons.min.css" />
@@ -115,17 +95,10 @@
     <Content Include="assets\plugin-utils\js\bootstrap.min.js" />
     <Content Include="assets\plugin-utils\js\jquery.min.js" />
     <Content Include="assets\plugin-utils\js\plugin-utils.js" />
-    <Content Include="assets\script.js" />
-    <Content Include="assets\style.css" />
-    <Content Include="assets\style.min.css" />
-    <Content Include="assets\template.html" />
-    <Content Include="assets\template.min.html" />
     <Content Include="logo.png" />
-    <Content Include="PageOAuth.aspx" />
-    <Content Include="PageOAuthQq.aspx" />
-    <Content Include="PageOAuthWeibo.aspx" />
-    <Content Include="PageOAuthWeixin.aspx" />
-    <Content Include="PageSettings.aspx" />
+    <Content Include="PageSettings.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

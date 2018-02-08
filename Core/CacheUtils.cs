@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Caching;
 
-namespace SS.Login.Core
+namespace SS.SMS.Core
 {
     public class CacheUtils
     {

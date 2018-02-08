@@ -1,74 +1,77 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using SiteServer.Plugin;
-using SS.Login.Core;
-using SS.Login.Model;
+using SS.SMS.Core;
+using SS.SMS.Model;
 
-namespace SS.Login.Pages
+namespace SS.SMS.Pages
 {
     public class PageSettings : Page
     {
         public Literal LtlMessage;
-        public CheckBoxList CblRegisterFields;
-        public TextBox TbRegisterSuccessMessage;
+        public Literal LtlType;
+
+        public DropDownList DdlProviderType;
+        public PlaceHolder PhYunpian;
+        public TextBox TbYunpianAppKey;
+
+        public PlaceHolder PhTest;
+        public Button BtnTest;
 
         private ConfigInfo _configInfo;
 
         public void Page_Load(object sender, EventArgs e)
         {
-            if (!Main.Instance.AdminApi.IsPluginAuthorized)
+            if (!SmsPlugin.Instance.AdminApi.IsPluginAuthorized)
             {
                 HttpContext.Current.Response.Write("<h1>未授权访问</h1>");
                 HttpContext.Current.Response.End();
                 return;
             }
 
-            _configInfo = Utils.GetConfigInfo();
+            _configInfo = SmsPlugin.GetConfigInfo();
 
             if (IsPostBack) return;
 
-            CblRegisterFields.Items.Add(new ListItem("用户名", nameof(IUserInfo.UserName)));
-            CblRegisterFields.Items.Add(new ListItem("姓名", nameof(IUserInfo.DisplayName)));
-            CblRegisterFields.Items.Add(new ListItem("电子邮箱", nameof(IUserInfo.Email)));
-            CblRegisterFields.Items.Add(new ListItem("手机号码", nameof(IUserInfo.Mobile)));
+            ESmsProviderTypeUtils.AddListItems(DdlProviderType);
+            Utils.SelectListItems(DdlProviderType, ESmsProviderTypeUtils.GetValue(_configInfo.SmsProviderType));
 
-            if (_configInfo.RegisterFields == null || _configInfo.RegisterFields.Count == 0)
-            {
-                _configInfo.RegisterFields = new List<string>
-                {
-                    nameof(IUserInfo.UserName)
-                };
-            }
-            Utils.SelectListItems(CblRegisterFields, _configInfo.RegisterFields.ToArray());
+            TbYunpianAppKey.Text = _configInfo.YunpianAppKey;
 
-            TbRegisterSuccessMessage.Text = _configInfo.RegisterSuccessMessage;
+            DdlProviderType_SelectedIndexChanged(null, EventArgs.Empty);
+
+            BtnTest.Attributes.Add("onclick", ModalTest.GetOpenScript());
         }
 
-        public void Submit_OnClick(object sender, EventArgs e)
+        public void DdlProviderType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var type = ESmsProviderTypeUtils.GetEnumType(DdlProviderType.SelectedValue);
+
+            if (type != ESmsProviderType.None)
+            {
+                LtlType.Text =
+                    $@"{ESmsProviderTypeUtils.GetText(type)}(<a href=""{ESmsProviderTypeUtils.GetUrl(type)}"" target=""_blank"">{ESmsProviderTypeUtils
+                        .GetUrl(type)}</a>)";
+            }
+            else
+            {
+                LtlType.Text = "请选择短信服务商";
+            }
+
+            PhYunpian.Visible = type == ESmsProviderType.Yunpian;
+            PhTest.Visible = type == ESmsProviderType.Yunpian && !string.IsNullOrEmpty(TbYunpianAppKey.Text);
+        }
+
+        public void BtnSubmit_OnClick(object sender, EventArgs e)
         {
             if (!Page.IsPostBack || !Page.IsValid) return;
 
-            var registerFields = Utils.GetSelectedListControlValueList(CblRegisterFields);
-            if (registerFields.Count == 0)
-            {
-                LtlMessage.Text = Utils.GetMessageHtml("请选择用户注册填写项！", false);
-                return;
-            }
-            if (!registerFields.Contains(nameof(IUserInfo.UserName)) && !registerFields.Contains(nameof(IUserInfo.Email)) && !registerFields.Contains(nameof(IUserInfo.Mobile)))
-            {
-                LtlMessage.Text = Utils.GetMessageHtml("注册填写项至少需要包含用户名、电子邮箱或者手机号码中的一项！", false);
-                return;
-            }
+            _configInfo.SmsProviderType = ESmsProviderTypeUtils.GetEnumType(DdlProviderType.SelectedValue);
+            _configInfo.YunpianAppKey = TbYunpianAppKey.Text;
+            SmsPlugin.Instance.ConfigApi.SetConfig(0, _configInfo);
 
-            _configInfo.RegisterFields = registerFields;
-            _configInfo.RegisterSuccessMessage = TbRegisterSuccessMessage.Text;
-
-            Main.Instance.ConfigApi.SetConfig(0, _configInfo);
-
-            LtlMessage.Text = Utils.GetMessageHtml("用户中心设置修改成功！", true);
+            LtlMessage.Text = Utils.GetMessageHtml("短信服务商设置成功！", true);
         }
     }
 }
