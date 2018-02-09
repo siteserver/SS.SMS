@@ -8,9 +8,11 @@ namespace SS.SMS
 {
     public class SmsPlugin : PluginBase
     {
-        public static SmsPlugin Instance { get; private set; }
+        internal static SmsPlugin Instance { get; private set; }
 
-        public static ConfigInfo GetConfigInfo()
+        public const string PluginId = "SS.SMS";
+
+        internal static ConfigInfo GetConfigInfo()
         {
             return Instance.ConfigApi.GetConfig<ConfigInfo>(0) ?? new ConfigInfo();
         }
