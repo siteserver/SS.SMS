@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SiteServer.Plugin, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\SiteServer.Plugin.1.3.0\lib\net45\SiteServer.Plugin.dll</HintPath>
+    <Reference Include="SiteServer.Plugin, Version=1.3.39.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\SiteServer.Plugin.1.3.39-beta\lib\net45\SiteServer.Plugin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -61,7 +61,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="appveyor.yml" />
     <None Include="assets\plugin-utils\fonts\fontawesome-webfont.eot" />
     <None Include="assets\plugin-utils\fonts\fontawesome-webfont.ttf" />
     <None Include="assets\plugin-utils\fonts\fontawesome-webfont.woff" />
@@ -71,7 +70,6 @@
     <None Include="assets\plugin-utils\fonts\ionicons.ttf" />
     <None Include="assets\plugin-utils\fonts\ionicons.woff" />
     <None Include="packages.config" />
-    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\layer\extend\layer.ext.js" />
@@ -95,7 +93,6 @@
     <Content Include="assets\plugin-utils\js\bootstrap.min.js" />
     <Content Include="assets\plugin-utils\js\jquery.min.js" />
     <Content Include="assets\plugin-utils\js\plugin-utils.js" />
-    <Content Include="logo.png" />
     <Content Include="PageSettings.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
