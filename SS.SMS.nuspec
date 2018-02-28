@@ -3,14 +3,14 @@
   <metadata>
     <id>SS.SMS</id>
     <version>$version$</version>
-    <title>SiteServer CMS 短信插件</title>
+    <title>短信发送插件</title>
     <authors>SiteServer CMS</authors>
     <owners>siteserver</owners>
     <licenseUrl>https://github.com/siteserver/SS.SMS/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/siteserver/SS.SMS</projectUrl>
     <iconUrl>https://github.com/siteserver/SS.SMS/raw/master/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>SiteServer CMS 短信插件</description>
+    <description>SiteServer CMS 短信发送插件</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>SiteServer CMS SMS Plugin</tags>
