@@ -15,8 +15,7 @@ namespace SS.SMS.Pages
 
         public static string GetOpenScript()
         {
-            return LayerUtils.GetOpenScript("选择需要显示的项",
-                SmsPlugin.Instance.PluginApi.GetPluginUrl($"{nameof(ModalTest)}.aspx"), 520, 350);
+            return LayerUtils.GetOpenScript("选择需要显示的项", $"{nameof(ModalTest)}.aspx", 520, 350);
         }
 
         public void Page_Load(object sender, EventArgs e)
