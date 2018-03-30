@@ -8,7 +8,7 @@
     <owners>siteserver</owners>
     <licenseUrl>https://github.com/siteserver/SS.SMS/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/siteserver/SS.SMS</projectUrl>
-    <iconUrl>https://github.com/siteserver/SS.SMS/raw/master/logo.png</iconUrl>
+    <iconUrl>http://plugins.siteserver.cn/ss.sms/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>SiteServer CMS 短信发送插件</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>

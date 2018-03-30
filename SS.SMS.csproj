@@ -94,6 +94,7 @@
     <Content Include="assets\plugin-utils\js\bootstrap.min.js" />
     <Content Include="assets\plugin-utils\js\jquery.min.js" />
     <Content Include="assets\plugin-utils\js\plugin-utils.js" />
+    <Content Include="logo.svg" />
     <Content Include="modalTest.aspx" />
     <Content Include="PageSettings.aspx">
       <SubType>ASPXCodeBehind</SubType>
