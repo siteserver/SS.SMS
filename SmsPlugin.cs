@@ -10,7 +10,7 @@ namespace SS.SMS
     {
         internal static SmsPlugin Instance { get; private set; }
 
-        public const string PluginId = "SS.SMS";
+        public static string PluginId => Instance.Id;
 
         internal static ConfigInfo GetConfigInfo()
         {
