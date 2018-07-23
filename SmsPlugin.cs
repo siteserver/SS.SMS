@@ -20,7 +20,7 @@ namespace SS.SMS
         public override void Startup(IService service)
         {
             service
-                .AddPluginMenu(new Menu
+                .AddSystemMenu(new Menu
                 {
                     Text = "短信发送设置",
                     Href = $"{nameof(PageSettings)}.aspx"
