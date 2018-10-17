@@ -8,28 +8,26 @@ namespace SS.SMS
 {
     public class SmsPlugin : PluginBase
     {
-        internal static SmsPlugin Instance { get; private set; }
-
-        public static string PluginId => Instance.Id;
+        public static string PluginId { get; private set; }
 
         internal static ConfigInfo GetConfigInfo()
         {
-            return Instance.ConfigApi.GetConfig<ConfigInfo>(0) ?? new ConfigInfo();
+            return Context.ConfigApi.GetConfig<ConfigInfo>(PluginId, 0) ?? new ConfigInfo();
         }
 
         public override void Startup(IService service)
         {
+            PluginId = Id;
+
             service
                 .AddSystemMenu(new Menu
                 {
                     Text = "短信发送设置",
                     Href = $"{nameof(PageSettings)}.aspx"
                 });
-
-            Instance = this;
         }
 
-        public bool IsReady
+        public static bool IsReady
         {
             get
             {
@@ -38,7 +36,7 @@ namespace SS.SMS
             }
         }
 
-        public bool Send(string mobile, string tplId, Dictionary<string, string> parameters, out string errorMessage)
+        public static bool Send(string mobile, string tplId, Dictionary<string, string> parameters, out string errorMessage)
         {
             if (string.IsNullOrEmpty(mobile) || !Utils.IsMobile(mobile))
             {
@@ -64,7 +62,7 @@ namespace SS.SMS
             return isSuccess;
         }
 
-        public bool SendCode(string mobile, int code, string tplId, out string errorMessage)
+        public static bool SendCode(string mobile, int code, string tplId, out string errorMessage)
         {
             var parameters = new Dictionary<string, string> { { "code", code.ToString() } };
             return Send(mobile, tplId, parameters, out errorMessage);
