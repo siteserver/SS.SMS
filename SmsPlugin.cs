@@ -8,7 +8,9 @@ namespace SS.SMS
 {
     public class SmsPlugin : PluginBase
     {
-        public static string PluginId { get; private set; }
+        public const string PluginId = "SS.SMS";
+
+        internal static SmsPlugin Instance;
 
         internal static ConfigInfo GetConfigInfo()
         {
@@ -17,17 +19,17 @@ namespace SS.SMS
 
         public override void Startup(IService service)
         {
-            PluginId = Id;
+            Instance = this;
 
             service
-                .AddSystemMenu(new Menu
+                .AddSystemMenu(() => new Menu
                 {
                     Text = "短信发送设置",
                     Href = $"{nameof(PageSettings)}.aspx"
                 });
         }
 
-        public static bool IsReady
+        public bool IsReady
         {
             get
             {
@@ -36,7 +38,7 @@ namespace SS.SMS
             }
         }
 
-        public static bool Send(string mobile, string tplId, Dictionary<string, string> parameters, out string errorMessage)
+        public bool Send(string mobile, string tplId, Dictionary<string, string> parameters, out string errorMessage)
         {
             if (string.IsNullOrEmpty(mobile) || !Utils.IsMobile(mobile))
             {
@@ -62,7 +64,7 @@ namespace SS.SMS
             return isSuccess;
         }
 
-        public static bool SendCode(string mobile, int code, string tplId, out string errorMessage)
+        public bool SendCode(string mobile, int code, string tplId, out string errorMessage)
         {
             var parameters = new Dictionary<string, string> { { "code", code.ToString() } };
             return Send(mobile, tplId, parameters, out errorMessage);
