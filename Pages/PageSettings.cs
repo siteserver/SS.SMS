@@ -23,7 +23,9 @@ namespace SS.SMS.Pages
 
         public void Page_Load(object sender, EventArgs e)
         {
-            if (!SiteServer.Plugin.Context.Request.AdminPermissions.HasSystemPermissions(SmsPlugin.PluginId))
+            var request = SiteServer.Plugin.Context.GetCurrentRequest();
+
+            if (!request.AdminPermissions.HasSystemPermissions(SmsPlugin.PluginId))
             {
                 HttpContext.Current.Response.Write("<h1>未授权访问</h1>");
                 HttpContext.Current.Response.End();
