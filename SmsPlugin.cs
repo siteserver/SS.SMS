@@ -6,11 +6,11 @@ using SS.SMS.Pages;
 
 namespace SS.SMS
 {
-    public class SmsPlugin : PluginBase
+    public class Plugin : PluginBase
     {
         public const string PluginId = "SS.SMS";
 
-        internal static SmsPlugin Instance;
+        internal static Plugin Instance;
 
         internal static ConfigInfo GetConfigInfo()
         {

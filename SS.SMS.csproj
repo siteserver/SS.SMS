@@ -1,108 +1,41 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9ED0F176-D629-495C-92F4-E641BE7CCDF8}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SS.SMS</RootNamespace>
-    <AssemblyName>SS.SMS</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFrameworks>net451</TargetFrameworks>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageId>SS.SMS</PackageId>
+    <Version>1.0.0</Version>
+    <Title>短信发送插件</Title>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>SiteServer CMS</Authors>
+    <Company>SiteServer CMS</Company>
+    <Product>Datory</Product>
+    <Description>SiteServer CMS 短信发送插件</Description>
+    <PackageLicenseUrl>https://github.com/siteserver/SS.SMS/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/siteserver/SS.SMS</PackageProjectUrl>
+    <PackageIconUrl>https://plugins.siteserver.cn/ss.sms/logo.svg</PackageIconUrl>
+    <Copyright>Copyright © SiteServer CMS 2018</Copyright>
+    <PackageTags>SiteServer CMS SMS Plugin</PackageTags>
+    <RepositoryUrl>https://github.com/siteserver/SS.SMS</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes></PackageReleaseNotes>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SiteServer.Plugin, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\SiteServer.Plugin.2.1.0\lib\net45\SiteServer.Plugin.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
+    <Compile Remove="Core\CacheUtils.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
+    <PackageReference Include="SiteServer.Plugin" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Core\CacheUtils.cs" />
-    <Compile Include="Core\LayerUtils.cs" />
-    <Compile Include="Core\SmsManager.cs" />
-    <Compile Include="Core\Utils.cs" />
-    <Compile Include="Pages\ModalTest.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SmsPlugin.cs" />
-    <Compile Include="Model\ConfigInfo.cs" />
-    <Compile Include="Model\ESmsProviderType.cs" />
-    <Compile Include="Pages\PageSettings.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="assets\plugin-utils\fonts\fontawesome-webfont.eot" />
-    <None Include="assets\plugin-utils\fonts\fontawesome-webfont.ttf" />
-    <None Include="assets\plugin-utils\fonts\fontawesome-webfont.woff" />
-    <None Include="assets\plugin-utils\fonts\fontawesome-webfont.woff2" />
-    <None Include="assets\plugin-utils\fonts\FontAwesome.otf" />
-    <None Include="assets\plugin-utils\fonts\ionicons.eot" />
-    <None Include="assets\plugin-utils\fonts\ionicons.ttf" />
-    <None Include="assets\plugin-utils\fonts\ionicons.woff" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="assets\js\jquery.min.js" />
-    <Content Include="assets\layer\extend\layer.ext.js" />
-    <Content Include="assets\layer\layer.min.js" />
-    <Content Include="assets\layer\skin\default\icon_ext.png" />
-    <Content Include="assets\layer\skin\default\textbg.png" />
-    <Content Include="assets\layer\skin\default\xubox_ico0.png" />
-    <Content Include="assets\layer\skin\default\xubox_loading0.gif" />
-    <Content Include="assets\layer\skin\default\xubox_loading1.gif" />
-    <Content Include="assets\layer\skin\default\xubox_loading2.gif" />
-    <Content Include="assets\layer\skin\default\xubox_loading3.gif" />
-    <Content Include="assets\layer\skin\default\xubox_title0.png" />
-    <Content Include="assets\layer\skin\layer.css" />
-    <Content Include="assets\layer\skin\layer.ext.css" />
-    <Content Include="assets\plugin-utils\css\bootstrap.min.css" />
-    <Content Include="assets\plugin-utils\css\font-awesome.min.css" />
-    <Content Include="assets\plugin-utils\css\ionicons.min.css" />
-    <Content Include="assets\plugin-utils\css\plugin-utils.css" />
-    <Content Include="assets\plugin-utils\fonts\fontawesome-webfont.svg" />
-    <Content Include="assets\plugin-utils\fonts\ionicons.svg" />
-    <Content Include="assets\plugin-utils\js\bootstrap.min.js" />
-    <Content Include="assets\plugin-utils\js\jquery.min.js" />
-    <Content Include="assets\plugin-utils\js\plugin-utils.js" />
-    <Content Include="logo.svg" />
-    <Content Include="modalTest.aspx" />
-    <Content Include="PageSettings.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

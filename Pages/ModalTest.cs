@@ -36,7 +36,7 @@ namespace SS.SMS.Pages
             var errorMessage = string.Empty;
             if (DdlType.SelectedValue == "code")
             {
-                isSuccess = SmsPlugin.Instance.SendCode(TbMobile.Text, Utils.GetRandomInt(1000, 9999), TbTplId.Text, out errorMessage);
+                isSuccess = Plugin.Instance.SendCode(TbMobile.Text, Utils.GetRandomInt(1000, 9999), TbTplId.Text, out errorMessage);
             }
 
             LtlMessage.Text = isSuccess ? Utils.GetMessageHtml("成功发送测试短信", true) : Utils.GetMessageHtml($"发送测试短信失败：{errorMessage}", false);

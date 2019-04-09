@@ -23,16 +23,16 @@ namespace SS.SMS.Pages
 
         public void Page_Load(object sender, EventArgs e)
         {
-            var request = SiteServer.Plugin.Context.GetCurrentRequest();
+            var request = SiteServer.Plugin.Context.AuthenticatedRequest;
 
-            if (!request.AdminPermissions.HasSystemPermissions(SmsPlugin.PluginId))
+            if (!request.AdminPermissions.HasSystemPermissions(Plugin.PluginId))
             {
                 HttpContext.Current.Response.Write("<h1>未授权访问</h1>");
                 HttpContext.Current.Response.End();
                 return;
             }
 
-            _configInfo = SmsPlugin.GetConfigInfo();
+            _configInfo = Plugin.GetConfigInfo();
 
             if (IsPostBack) return;
 
@@ -71,7 +71,7 @@ namespace SS.SMS.Pages
 
             _configInfo.SmsProviderType = ESmsProviderTypeUtils.GetEnumType(DdlProviderType.SelectedValue);
             _configInfo.YunpianAppKey = TbYunpianAppKey.Text;
-            SiteServer.Plugin.Context.ConfigApi.SetConfig(SmsPlugin.PluginId, 0, _configInfo);
+            SiteServer.Plugin.Context.ConfigApi.SetConfig(Plugin.PluginId, 0, _configInfo);
 
             LtlMessage.Text = Utils.GetMessageHtml("短信服务商设置成功！", true);
         }
