@@ -16,6 +16,11 @@ namespace SS.SMS.Pages
         public PlaceHolder PhYunpian;
         public TextBox TbYunpianAppKey;
 
+        public PlaceHolder PhAliYun;
+        public TextBox TbAliYunAccessKeyId;
+        public TextBox TbAliYunAccessKeySecret;
+        public TextBox TbAliYunSignName;
+
         public PlaceHolder PhTest;
         public Button BtnTest;
 
@@ -41,6 +46,10 @@ namespace SS.SMS.Pages
 
             TbYunpianAppKey.Text = _configInfo.YunpianAppKey;
 
+            TbAliYunAccessKeyId.Text = _configInfo.AliYunAccessKeyId;
+            TbAliYunAccessKeySecret.Text = _configInfo.AliYunAccessKeySecret;
+            TbAliYunSignName.Text = _configInfo.AliYunSignName;
+
             DdlProviderType_SelectedIndexChanged(null, EventArgs.Empty);
 
             BtnTest.Attributes.Add("onclick", ModalTest.GetOpenScript());
@@ -62,7 +71,21 @@ namespace SS.SMS.Pages
             }
 
             PhYunpian.Visible = type == ESmsProviderType.Yunpian;
-            PhTest.Visible = type == ESmsProviderType.Yunpian && !string.IsNullOrEmpty(TbYunpianAppKey.Text);
+            PhAliYun.Visible = type == ESmsProviderType.AliYun;
+            if (type == ESmsProviderType.Yunpian && !string.IsNullOrEmpty(TbYunpianAppKey.Text))
+            {
+                PhTest.Visible = true;
+            }
+            else if (type == ESmsProviderType.AliYun && !string.IsNullOrEmpty(TbAliYunAccessKeyId.Text) &&
+                       !string.IsNullOrEmpty(TbAliYunAccessKeySecret.Text) &&
+                       !string.IsNullOrEmpty(TbAliYunSignName.Text))
+            {
+                PhTest.Visible = true;
+            }
+            else
+            {
+                PhTest.Visible = false;
+            }
         }
 
         public void BtnSubmit_OnClick(object sender, EventArgs e)
@@ -70,7 +93,13 @@ namespace SS.SMS.Pages
             if (!Page.IsPostBack || !Page.IsValid) return;
 
             _configInfo.SmsProviderType = ESmsProviderTypeUtils.GetEnumType(DdlProviderType.SelectedValue);
+
             _configInfo.YunpianAppKey = TbYunpianAppKey.Text;
+
+            _configInfo.AliYunAccessKeyId = TbAliYunAccessKeyId.Text;
+            _configInfo.AliYunAccessKeySecret = TbAliYunAccessKeySecret.Text;
+            _configInfo.AliYunSignName = TbAliYunSignName.Text;
+
             SiteServer.Plugin.Context.ConfigApi.SetConfig(Plugin.PluginId, 0, _configInfo);
 
             LtlMessage.Text = Utils.GetMessageHtml("短信服务商设置成功！", true);

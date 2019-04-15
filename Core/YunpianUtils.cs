@@ -8,9 +8,9 @@ using SS.SMS.Model;
 
 namespace SS.SMS.Core
 {
-    public class SmsManager
+    public static class YunpianUtils
     {
-        public static bool SendByYunpian(ConfigInfo config, string mobile, string tplId, Dictionary<string, string> parameters, out string errorMessage)
+        public static bool Send(ConfigInfo config, string mobile, string tplId, Dictionary<string, string> parameters, out string errorMessage)
         {
             var param = new StringBuilder();
             if (parameters != null)
@@ -33,10 +33,10 @@ namespace SS.SMS.Core
             //, Encoding.UTF8);
             var tplValue = HttpUtility.UrlEncode(param.ToString(), Encoding.UTF8);
 
-            return HttpPostToYunpian("https://sms.yunpian.com/v1/sms/tpl_send.json", "apikey=" + config.YunpianAppKey + "&mobile=" + mobile + "&tpl_id=" + tplId + "&tpl_value=" + tplValue, out errorMessage);
+            return HttpPost("https://sms.yunpian.com/v1/sms/tpl_send.json", "apikey=" + config.YunpianAppKey + "&mobile=" + mobile + "&tpl_id=" + tplId + "&tpl_value=" + tplValue, out errorMessage);
         }
 
-        private static bool HttpPostToYunpian(string url, string data, out string errorMessage)
+        private static bool HttpPost(string url, string data, out string errorMessage)
         {
             errorMessage = null;
             try

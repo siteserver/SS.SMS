@@ -51,9 +51,13 @@ namespace SS.SMS
             errorMessage = string.Empty;
             var isSuccess = false;
 
-            if (config.SmsProviderType == ESmsProviderType.Yunpian)
+            if (config.SmsProviderType == ESmsProviderType.AliYun)
             {
-                isSuccess = SmsManager.SendByYunpian(config, mobile, tplId, parameters, out errorMessage);
+                isSuccess = AliYunUtils.Send(config, mobile, tplId, parameters, out errorMessage);
+            }
+            else if (config.SmsProviderType == ESmsProviderType.Yunpian)
+            {
+                isSuccess = YunpianUtils.Send(config, mobile, tplId, parameters, out errorMessage);
             }
 
             if (!isSuccess && string.IsNullOrEmpty(errorMessage))

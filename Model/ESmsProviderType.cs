@@ -1,18 +1,23 @@
-﻿using System.Collections.Generic;
-using System.Web.UI.WebControls;
+﻿using System.Web.UI.WebControls;
 
 namespace SS.SMS.Model
 {
     public enum ESmsProviderType
     {
-        Yunpian,
-        None
+        None,
+        AliYun,
+        Yunpian
     }
 
     public class ESmsProviderTypeUtils
     {
         public static string GetValue(ESmsProviderType type)
         {
+            if (type == ESmsProviderType.AliYun)
+            {
+                return "AliYun";
+            }
+
             if (type == ESmsProviderType.Yunpian)
             {
                 return "Yunpian";
@@ -22,6 +27,10 @@ namespace SS.SMS.Model
 
         public static string GetText(ESmsProviderType type)
         {
+            if (type == ESmsProviderType.AliYun)
+            {
+                return "阿里云";
+            }
             if (type == ESmsProviderType.Yunpian)
             {
                 return "云片";
@@ -31,6 +40,10 @@ namespace SS.SMS.Model
 
         public static string GetUrl(ESmsProviderType type)
         {
+            if (type == ESmsProviderType.AliYun)
+            {
+                return "https://www.aliyun.com/product/sms";
+            }
             if (type == ESmsProviderType.Yunpian)
             {
                 return "http://www.yunpian.com/";
@@ -40,33 +53,29 @@ namespace SS.SMS.Model
 
         public static ESmsProviderType GetEnumType(string typeStr)
         {
-            var retval = ESmsProviderType.None;
-            if (Equals(typeStr, ESmsProviderType.Yunpian))
+            var retVal = ESmsProviderType.None;
+            if (Equals(typeStr, ESmsProviderType.AliYun))
             {
-                retval = ESmsProviderType.Yunpian;
+                retVal = ESmsProviderType.AliYun;
             }
-            return retval;
+            else if (Equals(typeStr, ESmsProviderType.Yunpian))
+            {
+                retVal = ESmsProviderType.Yunpian;
+            }
+            return retVal;
         }
 
-        public static bool Equals(ESmsProviderType type, string typeStr)
+        private static bool Equals(ESmsProviderType type, string typeStr)
         {
             return !string.IsNullOrEmpty(typeStr) && string.Equals(GetValue(type).ToLower(), typeStr.ToLower());
         }
 
-        public static bool Equals(string typeStr, ESmsProviderType type)
+        private static bool Equals(string typeStr, ESmsProviderType type)
         {
             return Equals(type, typeStr);
         }
 
-        public static List<ESmsProviderType> GetList()
-        {
-            return new List<ESmsProviderType>
-            {
-                ESmsProviderType.Yunpian
-            };
-        }
-
-        public static ListItem GetListItem(ESmsProviderType type, bool selected)
+        private static ListItem GetListItem(ESmsProviderType type, bool selected)
         {
             var item = new ListItem(GetText(type), GetValue(type));
             if (selected)
@@ -81,6 +90,7 @@ namespace SS.SMS.Model
             if (listControl != null)
             {
                 listControl.Items.Add(GetListItem(ESmsProviderType.None, false));
+                //listControl.Items.Add(GetListItem(ESmsProviderType.AliYun, false));
                 listControl.Items.Add(GetListItem(ESmsProviderType.Yunpian, false));
             }
         }
