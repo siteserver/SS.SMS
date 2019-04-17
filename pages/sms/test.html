@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>SiteServer CMS 短信发送插件</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="../../assets/css/font-awesome-4.7.0.min.css" rel="stylesheet" type="text/css" />
+  <link href="../../assets/css/bootstrap-4.1.0.min.css" rel="stylesheet" type="text/css" />
+  <link href="../../assets/css/siteserver-1.0.7.min.css" rel="stylesheet" type="text/css" />
+  <style>
+    .nav .nav-link {
+    font-weight: normal;
+    border-radius: 1.25rem;
+    font-size: 14px;
+    }
+    .editable, .editable a, .editable span {
+      border-bottom: dashed 1px #0056b3 !important;
+    }
+  </style>
+</head>
+
+<body class="p-0">
+  <div id="main" class="m-t-15 m-b-15 m-l-15 m-r-15">
+    <template v-if="pageLoad">
+      <div class="card-box">
+
+        <div class="mb-3">
+          <ul class="nav nav-pills nav-justified">
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:;" @click="{btnNavClick('settings.html')}">短信发送设置</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="javascript:;" @click="{btnNavClick('test.html')}">发送短信测试</a>
+            </li>
+          </ul>
+        </div>
+
+        <hr />
+  
+        <div v-if="pageAlert" class="alert" v-bind:class="{ 'alert-warning': pageAlert.type === 'warning', 'alert-success': pageAlert.type === 'success', 'alert-danger': pageAlert.type === 'danger' }">
+          <button v-on:click="pageAlert = null" class="close" data-dismiss="alert">×</button>
+          <span v-html="pageAlert.html"></span>
+        </div>
+
+        <div class="form-group">
+          <label>短信类型</label>
+          <select v-model="configInfo.testType" class="form-control">
+            <option value="code">验证码</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>
+            接收短信手机号
+            <small v-show="errors.has('testMobile')" class="text-danger">{{ errors.first('testMobile') }}</small>
+          </label>
+          <input type="text" v-model="configInfo.testMobile" name="testMobile"
+              data-vv-as="接收短信手机号" v-validate="'required|mobile'" :class="{'is-invalid': errors.has('testMobile') }" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label>
+            模板Id
+            <small v-show="errors.has('testTplId')" class="text-danger">{{ errors.first('testTplId') }}</small>
+          </label>
+          <input type="text" v-model="configInfo.testTplId" name="testTplId"
+            data-vv-as="模板Id" v-validate="'required'" :class="{'is-invalid': errors.has('testTplId') }" class="form-control">
+        </div>
+  
+        <hr />
+  
+        <div class="text-center">
+          <button class="btn btn-primary" v-on:click="btnSubmitClick">发送测试短信</button>
+        </div>
+      
+      </div>
+    </template>
+    <template v-else>
+      <div class="text-center" style="margin-top: 100px">
+        <img class="mt-3" src="../../assets/images/loading.gif" />
+        <p class="lead mt-3 text-nowrap">载入中，请稍后...</p>
+      </div>
+    </template>
+  </div>
+</body>
+
+</html>
+<script src="../../assets/lib/es6-promise.auto.min.js"></script>
+<script src="../../assets/lib/axios-0.18.0.min.js"></script>
+<script src="../../assets/lib/jquery-1.9.1.min.js"></script>
+<script src="../../assets/lib/layer/layer-3.1.1.js"></script>
+<script src="../../assets/lib/vue-2.6.10.min.js" type="text/javascript"></script>
+
+<script src="../../assets/lib/vee-validate/vee-validate-2.2.2.js" type="text/javascript"></script>
+<script src="../../assets/lib/vee-validate/locale/zh_CN-2.2.2.js" type="text/javascript"></script>
+<script src="../../assets/js/validate.js" type="text/javascript"></script>
+
+<script src="../../assets/lib/sweetalert2-7.28.4.all.min.js" type="text/javascript"></script>
+<script src="../../assets/js/swal2.js" type="text/javascript"></script>
+
+<script src="../../assets/js/utils.js" type="text/javascript"></script>
+<script src="test.js" type="text/javascript"></script>

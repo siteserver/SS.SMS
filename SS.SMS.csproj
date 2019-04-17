@@ -23,7 +23,6 @@
 
   <ItemGroup>
     <Content Include="assets\**" />
-    <Content Include="docs\**" />
     <Content Include="pages\**" />
   </ItemGroup>
 

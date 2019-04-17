@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using SiteServer.Plugin;
 using SS.SMS.Core;
+using SS.SMS.Core.AliYun;
+using SS.SMS.Core.YunPian;
 
 namespace SS.SMS
 {
@@ -23,7 +25,7 @@ namespace SS.SMS
                 .AddSystemMenu(() => new Menu
                 {
                     Text = "短信发送设置",
-                    Href = $"pages/{nameof(PageSettings)}.aspx"
+                    Href = "pages/sms/settings.html"
                 });
         }
 
@@ -32,7 +34,7 @@ namespace SS.SMS
             get
             {
                 var config = GetConfigInfo();
-                return config.SmsProviderType == ESmsProviderType.Yunpian && !string.IsNullOrEmpty(config.YunpianAppKey);
+                return config.IsEnabled;
             }
         }
 
@@ -49,13 +51,16 @@ namespace SS.SMS
             errorMessage = string.Empty;
             var isSuccess = false;
 
-            if (config.SmsProviderType == ESmsProviderType.AliYun)
+            if (config.IsEnabled)
             {
-                isSuccess = AliYunUtils.Send(config, mobile, tplId, parameters, out errorMessage);
-            }
-            else if (config.SmsProviderType == ESmsProviderType.Yunpian)
-            {
-                isSuccess = YunpianUtils.Send(config, mobile, tplId, parameters, out errorMessage);
+                if (config.Provider == SmsProvider.AliYun.Value)
+                {
+                    isSuccess = AliYunUtils.Send(config, mobile, tplId, parameters, out errorMessage);
+                }
+                else if (config.Provider == SmsProvider.YunPian.Value)
+                {
+                    isSuccess = YunPianUtils.Send(config, mobile, tplId, parameters, out errorMessage);
+                }
             }
 
             if (!isSuccess && string.IsNullOrEmpty(errorMessage))
