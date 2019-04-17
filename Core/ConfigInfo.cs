@@ -1,4 +1,4 @@
-﻿namespace SS.SMS.Model
+﻿namespace SS.SMS.Core
 {
     public class ConfigInfo
     {

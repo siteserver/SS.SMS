@@ -1,6 +1,6 @@
 ﻿using System.Web.UI.WebControls;
 
-namespace SS.SMS.Model
+namespace SS.SMS.Core
 {
     public enum ESmsProviderType
     {

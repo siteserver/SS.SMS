@@ -1,15 +1,15 @@
-﻿<%@ Page Language="C#" Inherits="SS.SMS.Pages.ModalTest" %>
+﻿<%@ Page Language="C#" Inherits="SS.SMS.Core.ModalTest" %>
   <!DOCTYPE html>
   <html style="background:#fff">
 
   <head>
     <meta charset="utf-8">
-    <link href="assets/plugin-utils/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugin-utils/css/plugin-utils.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugin-utils/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugin-utils/css/ionicons.min.css" rel="stylesheet" type="text/css" />
-    <script src="assets/js/jquery.min.js" type="text/javascript"></script>
-    <script src="assets/layer/layer.min.js" type="text/javascript"></script>
+    <link href="../assets/plugin-utils/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/plugin-utils/css/plugin-utils.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/plugin-utils/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/plugin-utils/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <script src="../assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="../assets/layer/layer.min.js" type="text/javascript"></script>
   </head>
 
   <body style="padding: 0;background:#fff" class="m-l-15 m-r-15 m-t-15">

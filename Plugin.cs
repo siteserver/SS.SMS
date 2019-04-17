@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using SiteServer.Plugin;
 using SS.SMS.Core;
-using SS.SMS.Model;
-using SS.SMS.Pages;
 
 namespace SS.SMS
 {
@@ -25,7 +23,7 @@ namespace SS.SMS
                 .AddSystemMenu(() => new Menu
                 {
                     Text = "短信发送设置",
-                    Href = $"{nameof(PageSettings)}.aspx"
+                    Href = $"pages/{nameof(PageSettings)}.aspx"
                 });
         }
 

@@ -2,10 +2,8 @@
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using SS.SMS.Core;
-using SS.SMS.Model;
 
-namespace SS.SMS.Pages
+namespace SS.SMS.Core
 {
     public class PageSettings : Page
     {

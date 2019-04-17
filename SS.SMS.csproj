@@ -11,10 +11,10 @@
     <Company>SiteServer CMS</Company>
     <Product>Datory</Product>
     <Description>SiteServer CMS 短信发送插件</Description>
-    <PackageLicenseUrl>https://github.com/siteserver/SS.SMS/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicense>GPL-3.0</PackageLicense>
     <PackageProjectUrl>https://github.com/siteserver/SS.SMS</PackageProjectUrl>
-    <PackageIconUrl>https://plugins.siteserver.cn/ss.sms/logo.svg</PackageIconUrl>
-    <Copyright>Copyright © SiteServer CMS 2018</Copyright>
+    <PackageIconUrl>https://www.siteserver.cn/docs/SS.SMS/logo.svg</PackageIconUrl>
+    <Copyright>Copyright © SiteServer CMS</Copyright>
     <PackageTags>SiteServer CMS SMS Plugin</PackageTags>
     <RepositoryUrl>https://github.com/siteserver/SS.SMS</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
@@ -22,16 +22,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Core\CacheUtils.cs" />
+    <Content Include="assets\**" />
+    <Content Include="docs\**" />
+    <Content Include="pages\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
-    <PackageReference Include="SiteServer.Plugin" Version="2.3.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
+    <PackageReference Include="SiteServer.Plugin" Version="2.3.4" />
   </ItemGroup>
 
   <ItemGroup>
